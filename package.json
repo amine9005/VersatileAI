@@ -22,6 +22,7 @@
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
+    "autoprefixer": "^10.4.21",
     "babel-plugin-react-compiler": "^19.1.0-rc.3",
     "daisyui": "v4",
     "eslint": "^9.39.1",
