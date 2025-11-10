@@ -9,6 +9,7 @@ import RemoveBackground from "./Pages/AI Tasks/RemoveBackground";
 import RemoveObject from "./Pages/AI Tasks/RemoveObject";
 import ReviewResume from "./Pages/AI Tasks/ReviewResume";
 import BlogTitles from "./Pages/AI Tasks/BlogTitles";
+import Community from "./Pages/AI Tasks/Community";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="remove-background" element={<RemoveBackground />} />
           <Route path="remove-object" element={<RemoveObject />} />
           <Route path="review-resume" element={<ReviewResume />} />
+          <Route path="community" element={<Community />} />
         </Route>
       </Routes>
     </div>
