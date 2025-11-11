@@ -1,5 +1,4 @@
 import { ArrowRight, Bot } from "lucide-react";
-import React from "react";
 import { Link } from "react-router";
 import { useClerk, useAuth, useUser, UserButton } from "@clerk/clerk-react";
 
