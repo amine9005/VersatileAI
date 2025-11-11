@@ -30,7 +30,8 @@ const SideBar = ({ sidebar, setSidebar }) => {
 
   return (
     <div
-      className={`w-62 bg-white border-r border-[2px] border-gray-100 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0 ${sidebar ? "translate-x-0" : "max-sm:translate-x-full"} transition-all ease-in-out`}
+      className={`w-62 bg-white border-r border-[2px] border-gray-100 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0 `}
+      // ${sidebar ? "translate-x-0" : "max-sm:translate-x-full"} transition-all ease-in-out
     >
       <div className="my-7 w-full">
         <div className="cursor-pointer">
