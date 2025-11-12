@@ -17,7 +17,7 @@ const NavBar = () => {
       ) : (
         <button
           className="btn btn-outline btn-primary rounded-full px-10 "
-          onClick={() => openSignIn}
+          onClick={() => openSignIn()}
         >
           <span className=" text-blue-950 size-lg">Get Started</span>{" "}
           <ArrowRight className="size-5 text-blue-950" />
