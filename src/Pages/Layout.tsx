@@ -26,7 +26,7 @@ const Layout = () => {
       </nav>
       <div className="flex-1 w-full flex ">
         <div className={sidebar ? "z-20" : `max-sm:hidden`}>
-          <SideBar sidebar={sidebar} setSidebar={setSidebar} />
+          <SideBar setSidebar={setSidebar as typeof useState<boolean>} />
         </div>
         <div className="flex-1 bg-[#F4F7FB] p-4">
           <Outlet />

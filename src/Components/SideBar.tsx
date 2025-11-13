@@ -10,10 +10,10 @@ import {
   SquarePen,
   Users,
 } from "lucide-react";
-import React from "react";
+import { useState } from "react";
 import { NavLink } from "react-router";
 
-const SideBar = ({ sidebar, setSidebar }) => {
+const SideBar = ({ setSidebar }: { setSidebar: typeof useState<boolean> }) => {
   const navItems = [
     { to: "/ai", label: "Dashboard", Icon: House },
     { to: "/ai/write-article", label: "Write Article", Icon: SquarePen },

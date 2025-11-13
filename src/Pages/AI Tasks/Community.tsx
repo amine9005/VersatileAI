@@ -2,21 +2,10 @@ import { useState, useEffect } from "react";
 import { dummyPublishedCreationData } from "../../assets/assets";
 import { Heart } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
+import type { publishCreationDataType } from "../../lib/types";
 
 const Community = () => {
-  type Creation = {
-    id: number;
-    user_id: string;
-    prompt: string;
-    content: string;
-    type: string;
-    publish: boolean;
-    likes: never[];
-    created_at: string;
-    updated_at: string;
-  };
-  const creationsType: Creation[] = [];
-  const [creations, setCreations] = useState(creationsType);
+  const [creations, setCreations] = useState<publishCreationDataType[]>();
   const { user } = useUser();
 
   const getData = async () => {
@@ -31,7 +20,7 @@ const Community = () => {
     <div className="flex-1 flex flex-col gap-4 p-6 h-full ">
       <h2 className="text-lg font-semibold">Creations</h2>
       <div className="flex flex-wrap w-full bg-white h-full rounded-xl overflow-y-scroll">
-        {creations.map((item, index) => (
+        {creations!.map((item, index) => (
           <div
             key={index}
             className="relative group inline-block pl-3 pt-3 w-full sm:max-w-[calc(100vw/3)] lg:max-w-[calc(100vw/4)] "
@@ -50,7 +39,7 @@ const Community = () => {
                   {item.likes.length}
                 </p>
                 <Heart
-                  className={`min-w-5 h-5 hover:scale-110 cursor-pointer ${item.likes.includes(user?.id) ? "bg-red-500" : "text-white"}`}
+                  className={`min-w-5 h-5 hover:scale-110 cursor-pointer ${item.likes.includes(user!.id) ? "bg-red-500" : "text-white"}`}
                 />
               </div>
             </div>

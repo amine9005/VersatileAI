@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Markdown from "react-markdown";
+import type { creationDataType } from "../lib/types";
 
-const CreationItem = ({ item }) => {
+const CreationItem = ({ item }: { item: creationDataType }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (

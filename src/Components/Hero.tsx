@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router";
 import user_group from "../assets/user_group.png";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { AiToolsData } from "../assets/assets";
 import { Link } from "react-router";
 

@@ -3,21 +3,10 @@ import { dummyCreationData } from "../assets/assets";
 import { Gem, Sparkles } from "lucide-react";
 import { Protect } from "@clerk/clerk-react";
 import CreationItem from "../Components/CreationItem";
+import type { creationDataType } from "../lib/types";
 
 const Dashboard = () => {
-  type Creation = {
-    id: number;
-    user_id: string;
-    prompt: string;
-    content: string;
-    type: string;
-    publish: boolean;
-    likes: never[];
-    created_at: string;
-    updated_at: string;
-  };
-
-  const creationsType: Creation[] = [];
+  const creationsType: creationDataType[] = [];
 
   const [creations, setCreations] = useState(creationsType);
 

@@ -1,6 +1,6 @@
 import { ArrowRight, Bot } from "lucide-react";
 import { Link } from "react-router";
-import { useClerk, useAuth, useUser, UserButton } from "@clerk/clerk-react";
+import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
 
 const NavBar = () => {
   const { user } = useUser();

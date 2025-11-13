@@ -1,10 +1,11 @@
 import { FileText, Sparkles } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ReviewResume = () => {
-  const [path, setPath] = useState("");
+  const [path, setPath] = useState<File>();
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    console.log("path to file: ", path);
   };
 
   return (
@@ -26,7 +27,9 @@ const ReviewResume = () => {
           type="file"
           accept="application/pdf"
           required
-          onChange={(e) => setPath(e.target.files[0])}
+          onChange={(e) => {
+            if (e.target.files) setPath(e.target.files[0]);
+          }}
         />
         {/* <input
           type="file"
