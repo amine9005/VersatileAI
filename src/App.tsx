@@ -9,8 +9,17 @@ import RemoveObject from "./Pages/AI Tasks/RemoveObject";
 import ReviewResume from "./Pages/AI Tasks/ReviewResume";
 import BlogTitles from "./Pages/AI Tasks/BlogTitles";
 import Community from "./Pages/AI Tasks/Community";
+import { useAuth } from "@clerk/clerk-react";
+import { useEffect } from "react";
 
 const App = () => {
+  const { getToken } = useAuth();
+  useEffect(() => {
+    getToken().then((token: string | null) => {
+      console.log(token);
+    });
+  });
+
   return (
     <div>
       <Routes>
