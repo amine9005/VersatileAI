@@ -57,7 +57,7 @@ const Community = () => {
   }, [getToken, refresh]);
 
   return (
-    <div className="flex-1 flex flex-col gap-4 p-6 h-full ">
+    <div className="flex-1 flex flex-col gap-4 p-6 h-full max-h-[700px] ">
       <h2 className="text-lg font-semibold">Creations</h2>
       <div className="flex flex-wrap w-full bg-white h-full rounded-xl overflow-y-scroll">
         {loading === 0 ? (
