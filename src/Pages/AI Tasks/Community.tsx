@@ -35,7 +35,6 @@ const Community = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        setLoading(1);
         const { data } = await api.get("/user/get-published-creations", {
           headers: { Authorization: `Bearer ${await getToken()}` },
         });
@@ -51,6 +50,7 @@ const Community = () => {
         console.log({ error });
       }
       setRefresh(false);
+      setLoading(1);
     };
 
     getData();
