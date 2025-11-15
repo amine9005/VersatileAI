@@ -1,22 +1,45 @@
 import { useEffect, useState } from "react";
-import { dummyCreationData } from "../assets/assets";
-import { Gem, Sparkles } from "lucide-react";
-import { Protect } from "@clerk/clerk-react";
+import { Gem, Loader2, Sparkles } from "lucide-react";
+import { Protect, useAuth } from "@clerk/clerk-react";
 import CreationItem from "../Components/CreationItem";
 import type { creationDataType } from "../lib/types";
+import { api } from "../api/api";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const creationsType: creationDataType[] = [];
+  const [loading, setLoading] = useState(false);
 
+  const { userId } = useAuth();
+
+  const { getToken } = useAuth();
   const [creations, setCreations] = useState(creationsType);
 
-  const getData = async () => {
-    setCreations(dummyCreationData);
-  };
-
   useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const { data } = await api.get(
+          "/user/get-user-creations",
+
+          {
+            headers: { Authorization: `Bearer ${await getToken()}` },
+          }
+        );
+
+        if (data.success) {
+          setCreations(data.content);
+        } else {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        toast.error("Too many requests try again later");
+        console.log(error);
+      }
+      setLoading(false);
+    };
     getData();
-  }, []);
+  }, [userId, getToken]);
 
   return (
     <div className="h-full overflow-y-scroll p-6">
@@ -48,12 +71,31 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 h-full w-full max-h-[500px] overflow-y-scroll">
         <p className="mt-6 mb-4">Recent Creations</p>
-
-        {creations.map((creation) => (
-          <CreationItem key={creation.id} item={creation} />
-        ))}
+        <></>
+        {loading ? (
+          <div className="w-full h-full flex items-center justify-center">
+            <Loader2 className="animate-spin size-16 text-blue-700"></Loader2>
+          </div>
+        ) : (
+          <>
+            {!creations ? (
+              <>
+                <div className="w-full h-full flex items-center justify-left">
+                  <p className="font-semibold text-black">
+                    Welcome to your dashboard. anything you create will appear
+                    here
+                  </p>
+                </div>
+              </>
+            ) : (
+              creations.map((item, index) => (
+                <CreationItem key={index} item={item} />
+              ))
+            )}
+          </>
+        )}
       </div>
     </div>
   );

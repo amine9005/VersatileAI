@@ -30,9 +30,10 @@ const SideBar = ({ setSidebar }: { setSidebar: typeof useState<boolean> }) => {
 
   return (
     <div
-      className={`w-62 bg-white border-r border-[2px] border-gray-100 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0 `}
+      className={`w-62 bg-white border-r border-[2px] border-gray-100 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0 h-full `}
       // ${sidebar ? "translate-x-0" : "max-sm:translate-x-full"} transition-all ease-in-out
     >
+      {/* SideBar Navigation */}
       <div className="my-7 w-full">
         <div className="cursor-pointer">
           <img
@@ -66,6 +67,7 @@ const SideBar = ({ setSidebar }: { setSidebar: typeof useState<boolean> }) => {
         </div>
       </div>
 
+      {/* User logout Icon */}
       <div className="w-full border-t border-gray-200 p-4 px-7 flex items-center justify-between">
         <div
           className="flex gap-2 items-center cursor-pointer"
@@ -79,7 +81,7 @@ const SideBar = ({ setSidebar }: { setSidebar: typeof useState<boolean> }) => {
           <div>
             <h1 className="text-sm font-medium">{user?.fullName}</h1>
             <p className="text-xs text-gray-500">
-              <Protect plan="premium" fallback="free">
+              <Protect plan="premium" fallback="free ">
                 premium
               </Protect>
               Plan

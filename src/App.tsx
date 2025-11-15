@@ -9,19 +9,12 @@ import RemoveObject from "./Pages/AI Tasks/RemoveObject";
 import ReviewResume from "./Pages/AI Tasks/ReviewResume";
 import BlogTitles from "./Pages/AI Tasks/BlogTitles";
 import Community from "./Pages/AI Tasks/Community";
-import { useAuth } from "@clerk/clerk-react";
-import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const { getToken } = useAuth();
-  useEffect(() => {
-    getToken().then((token: string | null) => {
-      console.log(token);
-    });
-  });
-
   return (
     <div>
+      <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/ai" element={<Layout />}>

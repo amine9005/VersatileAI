@@ -1,5 +1,8 @@
-import { Image, Sparkles } from "lucide-react";
+import { useAuth } from "@clerk/clerk-react";
+import { Image, Loader2, Sparkles } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { api } from "../../api/api";
 
 const GenerateImages = () => {
   const imageStyle = [
@@ -13,18 +16,52 @@ const GenerateImages = () => {
   ];
 
   const [selectedStyle, setSelectedStyle] = useState(imageStyle[0]);
-  const [style, setStyle] = useState("");
+  const [prompt, setPrompt] = useState("");
   const [publish, setPublish] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
+
+  const { getToken } = useAuth();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const { data } = await api.post(
+        "/ai/generate-image",
+        {
+          prompt: `generate an image about ${prompt} in the style ${selectedStyle}`,
+          publish: publish,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+        }
+      );
+
+      console.log({ data });
+
+      if (data.success) {
+        setImgUrl(data.content);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Too many requests try again later");
+      console.log("cant write article", error);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="container h-full flex flex-wrap gap-4 overflow-y-scroll items-start text-slate-700">
       {/* Left Col */}
       <form
         onSubmit={handleSubmit}
-        className="card w-full bg-white p-4 max-w-lg"
+        className="card w-full bg-white p-4 max-w-xl"
       >
         <div className="flex items-center gap-3">
           <Sparkles className="w-6 text-green-700" />
@@ -32,9 +69,9 @@ const GenerateImages = () => {
         </div>
         <p className="text-sm font-medium mt-6">Image Topic</p>
         <textarea
-          value={style}
+          value={prompt}
           rows={4}
-          onChange={(e) => setStyle(e.target.value)}
+          onChange={(e) => setPrompt(e.target.value)}
           className="textarea mt-6 p-2"
           placeholder="A man riding a horse to the moon..."
           required
@@ -94,25 +131,40 @@ const GenerateImages = () => {
 
         <button
           type="submit"
+          disabled={loading}
           className="btn btn-block mt-6 text-white rounded-2xl bg-gradient-to-r from-green-700 to-green-400"
         >
-          <Image className="w-5" />
+          {loading ? (
+            <Loader2 className="w-5 animate-spin" />
+          ) : (
+            <Image className="w-5" />
+          )}
           Generate Image
         </button>
       </form>
       {/* Right Col */}
-      <div className="card w-full bg-white p-4 max-w-lg min-h-[24rem] max-h-[800px]">
+      <div className="card w-full bg-white p-4 max-w-xl min-h-[24rem] max-h-[800px]">
         <div className="flex items-center gap-3">
           <Image className="w-6 text-green-700" />
           <h1 className="text-xl font-bold">Generated Image</h1>
         </div>
 
-        <div className="flex flex-1 justify-center items-center">
-          <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
-            <Image className="size-9" />
-            <p>Enter a topic and click "Generate Image" to get started</p>
+        {!imgUrl ? (
+          <div className="flex flex-1 justify-center items-center">
+            <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
+              <Image className="size-9" />
+              <p>Enter a topic and click "Generate Image" to get started</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="mt-3 h-full">
+            <img
+              src={imgUrl}
+              alt="generate image"
+              className="w-full h-full object-cover"
+            ></img>
+          </div>
+        )}
       </div>
     </div>
   );
