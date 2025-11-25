@@ -80,7 +80,8 @@ export const AiToolsData = [
 
 export const dummyTestimonialData = [
   {
-    image: assets.profile_img_1,
+    image:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
     name: "John Doe",
     title: "Marketing Director, TechCorp",
     content:
@@ -88,7 +89,8 @@ export const dummyTestimonialData = [
     rating: 4,
   },
   {
-    image: assets.profile_img_1,
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop",
     name: "Jane Smith",
     title: "Content Creator, TechCorp",
     content:
@@ -96,7 +98,8 @@ export const dummyTestimonialData = [
     rating: 5,
   },
   {
-    image: assets.profile_img_1,
+    image:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
     name: "David Lee",
     title: "Content Writer, TechCorp",
     content:
