@@ -1,4 +1,4 @@
-import { ArrowRight, Bot } from "lucide-react";
+import { ArrowRight, Bot, User2Icon } from "lucide-react";
 import { Link } from "react-router";
 import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
 
@@ -15,13 +15,19 @@ const NavBar = () => {
       {user ? (
         <UserButton />
       ) : (
-        <button
-          className="btn btn-outline btn-primary rounded-full px-10 "
-          onClick={() => openSignIn()}
-        >
-          <span className=" text-blue-950 size-lg">Get Started</span>{" "}
-          <ArrowRight className="size-5 text-blue-950" />
-        </button>
+        <>
+          <User2Icon
+            onClick={() => openSignIn()}
+            className="size-10 md:hidden border-2 border-black p-1 rounded-full"
+          />{" "}
+          <button
+            className="hidden btn btn-outline md:flex btn-primary rounded-full px-10 "
+            onClick={() => openSignIn()}
+          >
+            <span className=" text-blue-950 text-md">Get Started</span>{" "}
+            <ArrowRight className="size-5 text-blue-950" />
+          </button>
+        </>
       )}
     </div>
   );
